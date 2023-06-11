@@ -1,4 +1,4 @@
-FROM openjdk:18.0.2.1-slim-buster
+FROM eclipse-temurin:17.0.5_8-jre-alpine
 
 COPY build/libs/*.jar /opt/app/application-plain.jar
 
