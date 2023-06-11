@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  snackbar-mysql-db:
+    container_name: snackbar-mysql-db
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=snackbar
+    ports:
+      - 3307:3306
+    networks:
+      - snackbar_network
+  snackbar-app:
+    container_name: snackbar-app
+    image: gutembergrcc/snackbar-app:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - snackbar-mysql-db
+    networks:
+      - snackbar_network
+    environment:
+      - WAIT_HOSTS=snackbar-mysql-db:3307
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+networks:
+  snackbar_network:
+    driver: bridge
+    name: snackbar_network

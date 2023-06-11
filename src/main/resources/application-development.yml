@@ -1,0 +1,12 @@
+mysql:
+  username: root
+  password: 123456
+  schema: snackbar
+  url: snackbar-mysql-db:3307
+
+server:
+  port: 8080
+  undertow:
+    threads:
+      worker: 10
+      io: 2
