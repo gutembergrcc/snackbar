@@ -97,7 +97,7 @@ O MySQL já estará disponível:
 
 ![img.png](readmefiles/mysql.png)
 
-**4. No diretório `src/main/resources/db.migration` está disponível as DDLs a serem executadas com a finalidade de criação das tabelas.**
+**4. No diretório `src/main/resources/db.migration` está disponível as DDLs a serem executadas com a finalidade de criação das tabelas. O Docker compose inicia a base de dados.**
 
 **5. Como a aplicação também foi inicializada a mesma possui uma interface Swagger, disponível em: http://localhost:8080/api/swagger-ui/index.html**
 
@@ -137,27 +137,12 @@ docker push gutembergrcc/spring-boot-docker-language-app
 
 ## Quero desenvolver novos Use Cases, qual a forma mais rápida de testar?
 
-1. Sugiro atualizar o docker-compose temporariamente apenas com o serviço de banco de dados:
+1. Caso o desenvolvedor não queira exedutar a geração do .Jar e levantar o Docker, sugiro executar o docker-compose-only-mysql. 
+Esse YML contêm apenas o serviço de base de dados e a aplicação poderá ser executada conforme o próximo passo.
 
-````
-version: '3.7'
-
-services:
-  snackbar-mysql-db:
-    container_name: snackbar-mysql-db
-    image: mysql:8
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=snackbar
-    ports:
-      - 3307:3306
-    networks:
-      - snackbar_network
-networks:
-  snackbar_network:
-    driver: bridge
-    name: snackbar_network
-````
+```shell
+docker-compose -f docker-compose-only-mysql.yml up
+```
 
 2. É possível executar como uma aplicação Java através do método main() na classe Main.java
 
