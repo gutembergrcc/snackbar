@@ -1,12 +1,12 @@
 package com.snackbar.adapters.outbound.persistence.customer.repository;
 
-import com.snackbar.adapters.outbound.persistence.product.repository.ProductJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<CustomerJpaEntity, String> {
 
+    @Query(nativeQuery = true, value = "select * from customers where cpf = :cpf")
+    Optional<CustomerJpaEntity> findCustomerByCpf(String cpf);
 }

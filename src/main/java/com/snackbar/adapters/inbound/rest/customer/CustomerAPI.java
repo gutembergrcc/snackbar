@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,10 @@ public interface CustomerAPI {
     )
     @Operation(summary = "Create a new customer")
     @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully"),
             @ApiResponse(responseCode = "201", description = "Created successfully"),
             @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
+            @ApiResponse(responseCode = "409", description = "CPF already registered"),
             @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
     })
     ResponseEntity<?> createCustomer(@RequestBody @Valid CustomerRequest request);
@@ -39,4 +42,16 @@ public interface CustomerAPI {
             @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
     })
     ResponseEntity<List<CustomerResponse>>  listAllCustomers();
+
+
+    @GetMapping("/{cpf}")
+    @Operation(summary = "Identify CPF")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully"),
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
+            @ApiResponse(responseCode = "409", description = "CPF already registered"),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
+    })
+    ResponseEntity<?> identifyCpf(@PathVariable @Valid String cpf);
 }

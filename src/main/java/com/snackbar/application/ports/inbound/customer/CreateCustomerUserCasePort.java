@@ -4,5 +4,5 @@ import com.snackbar.application.core.domain.customer.Customer;
 
 public interface CreateCustomerUserCasePort {
 
-    Customer execute(Customer product);
+    Customer execute(Customer customer);
 }

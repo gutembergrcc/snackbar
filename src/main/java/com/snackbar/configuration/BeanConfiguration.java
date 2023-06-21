@@ -8,6 +8,7 @@ import com.snackbar.adapters.outbound.persistence.product.SaveProductAdapter;
 import com.snackbar.adapters.outbound.persistence.product.UpdateProductAdapter;
 import com.snackbar.application.core.usecase.customer.create.CreateCustomerUseCase;
 import com.snackbar.application.core.usecase.customer.retrieve.FindAllCustomersUseCase;
+import com.snackbar.application.core.usecase.customer.retrieve.FindCustomerByCpfUseCase;
 import com.snackbar.application.core.usecase.product.create.CreateProductUseCase;
 import com.snackbar.application.core.usecase.product.delete.DeleteProductUseCase;
 import com.snackbar.application.core.usecase.product.retrieve.FindAllProductsUseCase;
@@ -52,5 +53,10 @@ public class BeanConfiguration {
     @Bean
     public FindAllCustomersUseCase findAllCustomers(FindCustomerAdapter findCustomerAdapter) {
         return new FindAllCustomersUseCase(findCustomerAdapter);
+    }
+
+    @Bean
+    public FindCustomerByCpfUseCase findCustomerByCpfUseCase(FindCustomerAdapter findCustomerByCpfUseCase){
+        return new FindCustomerByCpfUseCase(findCustomerByCpfUseCase);
     }
 }
