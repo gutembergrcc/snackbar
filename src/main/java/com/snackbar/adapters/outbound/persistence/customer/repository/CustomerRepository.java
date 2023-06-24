@@ -7,6 +7,4 @@ import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<CustomerJpaEntity, String> {
 
-    @Query(nativeQuery = true, value = "select * from customers where cpf = :cpf")
-    Optional<CustomerJpaEntity> findCustomerByCpf(String cpf);
 }

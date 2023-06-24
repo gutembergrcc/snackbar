@@ -1,6 +1,6 @@
 package com.snackbar.application.core.usecase.customer.retrieve;
 
-import com.snackbar.adapters.outbound.persistence.customer.repository.CustomerJpaEntity;
+import com.snackbar.application.core.domain.customer.Customer;
 import com.snackbar.application.ports.inbound.customer.FindCustomerByCpfUseCasePort;
 import com.snackbar.application.ports.outbound.customer.FindCustomerByCpfPort;
 
@@ -15,8 +15,7 @@ public class FindCustomerByCpfUseCase implements FindCustomerByCpfUseCasePort {
     }
 
     @Override
-    public Optional<CustomerJpaEntity> execute(String cpf) {
+    public Optional<Customer> execute(String cpf) {
         return this.findCustomerByCpfPort.findCustomerByCpf(cpf);
-
     }
 }

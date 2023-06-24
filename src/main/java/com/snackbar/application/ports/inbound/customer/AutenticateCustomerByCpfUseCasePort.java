@@ -4,7 +4,6 @@ import com.snackbar.application.core.domain.customer.Customer;
 
 import java.util.Optional;
 
-public interface FindCustomerByCpfUseCasePort {
-
+public interface AutenticateCustomerByCpfUseCasePort {
     Optional<Customer> execute(String cpf);
 }

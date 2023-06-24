@@ -12,9 +12,4 @@ public interface CustomerMapper {
         return new CustomerResponse(customer.getId().getValue(),
                 customer.getFirstName(), customer.getLastName(), customer.getCpf());
     }
-
-    static CustomerResponse entityToConsumerResponse(final Optional<CustomerJpaEntity> entity) {
-        return new CustomerResponse(entity.get().getId(),
-                entity.get().getFirstName(), entity.get().getLastName(), entity.get().getCpf());
-    }
 }

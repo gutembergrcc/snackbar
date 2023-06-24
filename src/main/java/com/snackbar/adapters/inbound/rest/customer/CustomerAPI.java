@@ -1,5 +1,6 @@
 package com.snackbar.adapters.inbound.rest.customer;
 
+import com.snackbar.adapters.inbound.rest.customer.models.AutenticateRequest;
 import com.snackbar.adapters.inbound.rest.customer.models.CustomerRequest;
 import com.snackbar.adapters.inbound.rest.customer.models.CustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +36,7 @@ public interface CustomerAPI {
     })
     ResponseEntity<?> createCustomer(@RequestBody @Valid CustomerRequest request);
 
-    @GetMapping()
+    @GetMapping("/list")
     @Operation(summary = "List all customers")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listed successfully"),
@@ -44,14 +45,15 @@ public interface CustomerAPI {
     ResponseEntity<List<CustomerResponse>>  listAllCustomers();
 
 
-    @GetMapping("/{cpf}")
-    @Operation(summary = "Identify CPF")
+    @PostMapping(value="autenticate",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Autenticate Customer")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully"),
-            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "200", description = "Cliente autenticado"),
             @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
-            @ApiResponse(responseCode = "409", description = "CPF already registered"),
+            @ApiResponse(responseCode = "403", description = "Cliente não existe ou não sem autorização"),
             @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
     })
-    ResponseEntity<?> identifyCpf(@PathVariable @Valid String cpf);
+    ResponseEntity<?> autenticateCustomer(@Valid @RequestBody AutenticateRequest request);
 }
