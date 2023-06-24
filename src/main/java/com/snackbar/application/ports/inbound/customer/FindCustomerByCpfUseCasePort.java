@@ -2,7 +2,9 @@ package com.snackbar.application.ports.inbound.customer;
 
 import com.snackbar.application.core.domain.customer.Customer;
 
-public interface CreateCustomerUserCasePort {
+import java.util.Optional;
 
-    Customer execute(Customer customer);
+public interface FindCustomerByCpfUseCasePort {
+
+    Optional<Customer> execute(String cpf);
 }

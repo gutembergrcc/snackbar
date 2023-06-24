@@ -39,6 +39,10 @@ public class CustomerJpaEntity {
         return new CustomerJpaEntity(customer.getId().getValue(), customer.getFirstName(), customer.getLastName(), customer.getCpf());
     }
 
+    public static CustomerJpaEntity from(final String cpf) {
+        return new CustomerJpaEntity(null, null, null, cpf);
+    }
+
     public Customer toAggregate() {
         return Customer.with(CustomerId.from(getId()), getFirstName(), getLastName(), getCpf());
     }

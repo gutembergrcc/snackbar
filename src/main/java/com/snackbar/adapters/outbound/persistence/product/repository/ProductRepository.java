@@ -8,6 +8,4 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<ProductJpaEntity, String> {
 
-    @Query(value = "select p.id from Product p where p.id in :ids")
-    List<String> existsByIds(@Param("ids") List<String> ids);
 }
