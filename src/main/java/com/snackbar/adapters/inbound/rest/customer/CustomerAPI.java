@@ -50,9 +50,9 @@ public interface CustomerAPI {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Autenticate Customer")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Cliente autenticado"),
+            @ApiResponse(responseCode = "200", description = "Authenticated client"),
             @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
-            @ApiResponse(responseCode = "403", description = "Cliente não existe ou não sem autorização"),
+            @ApiResponse(responseCode = "403", description = "Customer does not exist or without authorization"),
             @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
     })
     ResponseEntity<?> autenticateCustomer(@Valid @RequestBody AutenticateRequest request);

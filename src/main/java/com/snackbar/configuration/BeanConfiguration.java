@@ -2,6 +2,10 @@ package com.snackbar.configuration;
 
 import com.snackbar.adapters.outbound.persistence.customer.FindCustomerAdapter;
 import com.snackbar.adapters.outbound.persistence.customer.SaveCustomerAdapter;
+import com.snackbar.adapters.outbound.persistence.order.DeleteOrderAdapter;
+import com.snackbar.adapters.outbound.persistence.order.FindOrderAdapter;
+import com.snackbar.adapters.outbound.persistence.order.SaveOrderAdapter;
+import com.snackbar.adapters.outbound.persistence.order.UpdateOrderAdapter;
 import com.snackbar.adapters.outbound.persistence.product.DeleteProductAdapter;
 import com.snackbar.adapters.outbound.persistence.product.FindProductAdapter;
 import com.snackbar.adapters.outbound.persistence.product.SaveProductAdapter;
@@ -10,6 +14,11 @@ import com.snackbar.application.core.usecase.customer.autenticate.AutenticateCus
 import com.snackbar.application.core.usecase.customer.create.CreateCustomerUseCase;
 import com.snackbar.application.core.usecase.customer.retrieve.FindAllCustomersUseCase;
 import com.snackbar.application.core.usecase.customer.retrieve.FindCustomerByCpfUseCase;
+import com.snackbar.application.core.usecase.order.create.CreateOrderUseCase;
+import com.snackbar.application.core.usecase.order.delete.DeleteOrderUseCase;
+import com.snackbar.application.core.usecase.order.retrieve.FindAllOrdersUseCase;
+import com.snackbar.application.core.usecase.order.retrieve.FindOrdersByStatusUseCase;
+import com.snackbar.application.core.usecase.order.update.UpdateOrderUseCase;
 import com.snackbar.application.core.usecase.product.create.CreateProductUseCase;
 import com.snackbar.application.core.usecase.product.delete.DeleteProductUseCase;
 import com.snackbar.application.core.usecase.product.retrieve.FindAllProductsUseCase;
@@ -64,5 +73,30 @@ public class BeanConfiguration {
     @Bean
     public AutenticateCustomerByCpfUseCase autenticateCustomerByCpfUseCase(FindCustomerAdapter findCustomerAdapter){
         return new AutenticateCustomerByCpfUseCase(findCustomerAdapter);
+    }
+
+    @Bean
+    public CreateOrderUseCase createOrder(SaveOrderAdapter saveOrderAdapter) {
+        return new CreateOrderUseCase(saveOrderAdapter);
+    }
+
+    @Bean
+    public DeleteOrderUseCase deleteOrder(DeleteOrderAdapter deleteOrderAdapter) {
+        return new DeleteOrderUseCase(deleteOrderAdapter);
+    }
+
+    @Bean
+    public UpdateOrderUseCase updateOrder(UpdateOrderAdapter updateOrderAdapter) {
+        return new UpdateOrderUseCase(updateOrderAdapter);
+    }
+
+    @Bean
+    public FindOrdersByStatusUseCase findOrdersByStatus(FindOrderAdapter findOrderAdapter) {
+        return new FindOrdersByStatusUseCase(findOrderAdapter);
+    }
+
+    @Bean
+    public FindAllOrdersUseCase findAllOrders(FindOrderAdapter findOrderAdapter) {
+        return new FindAllOrdersUseCase(findOrderAdapter);
     }
 }

@@ -14,3 +14,13 @@ create table products (
     name varchar(255) not null,
     price decimal(19,2) not null,
     primary key (id));
+
+
+create table orders (
+    id varchar(50) not null,
+    product_id varchar(50) not null,
+    customer_id varchar(50) not null,
+    description varchar(255) not null,
+    status varchar(50) not null,
+    primary key (id);
+)

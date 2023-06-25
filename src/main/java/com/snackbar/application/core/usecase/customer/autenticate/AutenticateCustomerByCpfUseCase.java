@@ -19,7 +19,7 @@ public class AutenticateCustomerByCpfUseCase implements AutenticateCustomerByCpf
     @Override
     public Optional<Customer> execute(String cpf) {
         Optional<Customer> customer = this.findCustomerByCpfPort.findCustomerByCpf(cpf);
-        if(!customer.isPresent()){
+        if(customer.isEmpty()){
             throw DomainException.with(new Error("Cliente não existente ou sem permissão de acesso!"));
         }
         return customer;
