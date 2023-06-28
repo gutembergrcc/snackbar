@@ -2,6 +2,7 @@ package com.snackbar.adapters.outbound.persistence.product;
 
 import com.snackbar.adapters.outbound.persistence.product.repository.ProductJpaEntity;
 import com.snackbar.adapters.outbound.persistence.product.repository.ProductRepository;
+import com.snackbar.application.core.domain.order.OrderId;
 import com.snackbar.application.core.domain.product.Category;
 import com.snackbar.application.core.domain.product.Product;
 import com.snackbar.application.ports.outbound.product.FindAllProductsPort;
@@ -23,6 +24,13 @@ public class FindProductAdapter implements FindProductsByCategoryPort, FindAllPr
     @Override
     public List<Product> findProductsByCategory(Category category) {
         ProductJpaEntity productJpaEntity = ProductJpaEntity.from(category);
+        Example<ProductJpaEntity> example = Example.of(productJpaEntity);
+        return this.repository.findAll(example).stream().map(ProductJpaEntity::toAggregate).toList();
+    }
+
+    @Override
+    public List<Product> findProductsByOrderId(OrderId orderId) {
+        ProductJpaEntity productJpaEntity = ProductJpaEntity.from(orderId);
         Example<ProductJpaEntity> example = Example.of(productJpaEntity);
         return this.repository.findAll(example).stream().map(ProductJpaEntity::toAggregate).toList();
     }

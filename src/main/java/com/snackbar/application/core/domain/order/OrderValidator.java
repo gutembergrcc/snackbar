@@ -1,5 +1,6 @@
 package com.snackbar.application.core.domain.order;
 
+import com.snackbar.application.core.domain.customer.Customer;
 import com.snackbar.application.core.domain.validation.Error;
 import com.snackbar.application.core.domain.validation.ValidationHandler;
 import com.snackbar.application.core.domain.validation.Validator;
@@ -19,9 +20,7 @@ public class OrderValidator extends Validator {
     @Override
     public void validate() {
         checkDescriptionConstraints();
-        checkProductConstraints();
         checkCustomerConstraints();
-        checkStatusConstraints();
     }
 
     private void checkDescriptionConstraints() {
@@ -33,27 +32,11 @@ public class OrderValidator extends Validator {
         }
     }
 
-    private void checkProductConstraints() {
-        String product = this.order.getProduct();
-
-        if (product == null) {
-            this.validationHandler().append(new Error("'product' should not be null"));
-        }
-    }
-
     private void checkCustomerConstraints() {
-        String customer = this.order.getCustomer();
+        Customer customer = this.order.getCustomer();
 
         if (customer == null) {
             this.validationHandler().append(new Error("'customer' should not be null"));
-        }
-    }
-
-    private void checkStatusConstraints() {
-        Status status = this.order.getStatus();
-
-        if (status == null) {
-            this.validationHandler().append(new Error("'status' should not be null"));
         }
     }
 

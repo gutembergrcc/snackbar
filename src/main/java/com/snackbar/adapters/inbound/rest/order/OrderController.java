@@ -44,7 +44,7 @@ public class OrderController implements OrderAPI {
     public ResponseEntity<?> createOrder(OrderRequest request) {
         OrderResponse output;
         try {
-            var newOrder = Order.newOrder(request.productId(), request.customerId(), request.description(), request.status());
+            var newOrder = Order.newOrder(request.customerId(), request.description(), Status.OPEN);
             var order = this.createOrderUseCasePort.execute(newOrder);
             output = OrderMapper.toOrderResponse(order);
         } catch (DomainException e) {
@@ -59,7 +59,7 @@ public class OrderController implements OrderAPI {
         OrderResponse output;
         try {
             var orderId = OrderId.from(id);
-            var updateOrder = Order.with(orderId, request.productId(), request.customerId(), request.description(), request.status());
+            var updateOrder = Order.with(orderId, request.customerId(), request.description(), request.status());
             var order = this.updateOrderUseCasePort.execute(updateOrder);
             output = OrderMapper.toOrderResponse(order);
         } catch (DomainException e) {

@@ -48,7 +48,7 @@ public class CustomerController implements CustomerAPI {
         try{
             if (!customerInBase.isPresent()){
                 String cpfSomenteDigitos = request.cpfNumber().replaceAll("\\D", "");
-                var newCustomer = Customer.newCustomer(request.firstName(), request.lastName(), cpfSomenteDigitos);
+                var newCustomer = Customer.newCustomer(request.firstName(), request.lastName(), cpfSomenteDigitos, null);
                 var customer = this.createCustomerUserCasePort.execute(newCustomer);
                 CustomerResponse output = CustomerMapper.toConsumerResponse(customer);
                 return ResponseEntity.created(URI.create("/customer" + output.id())).body(output);

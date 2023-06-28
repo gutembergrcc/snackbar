@@ -12,7 +12,7 @@ public class CustomerTest {
         final var expectedLastName = "Silva";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF, null);
 
         Assertions.assertNotNull(actualCustomer);
         Assertions.assertNotNull(actualCustomer.getId());
@@ -28,7 +28,7 @@ public class CustomerTest {
         final var expectedLastName = "Silva";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(null, expectedLastName, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(null, expectedLastName, expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -44,7 +44,7 @@ public class CustomerTest {
         final var expectedFirstName = "Jose";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, null, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, null, expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -60,7 +60,7 @@ public class CustomerTest {
         final var expectedFirstName = "Jose";
         final var expectedLastName = "Silva";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, null);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, null, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -76,7 +76,7 @@ public class CustomerTest {
         final var expectedLastName = "Silva";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(" ", expectedLastName, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(" ", expectedLastName, expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -92,7 +92,7 @@ public class CustomerTest {
         final var expectedFirstName = "Jose";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, " ", expectedCPF);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, " ", expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -108,7 +108,7 @@ public class CustomerTest {
         final var expectedFirstName = "Jose";
         final var expectedLastName = "Silva";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, " ");
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, " ", null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -125,7 +125,7 @@ public class CustomerTest {
         final var expectedLastName = "Silva";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -142,7 +142,7 @@ public class CustomerTest {
         final var expectedLastName = "S";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -164,7 +164,7 @@ public class CustomerTest {
         final var expectedLastName = "Silva";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -186,7 +186,7 @@ public class CustomerTest {
         final var expectedFirstName = "Jose";
         final var expectedCPF = "09293493219";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF);
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, expectedCPF, null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);
@@ -202,7 +202,7 @@ public class CustomerTest {
         final var expectedFirstName = "Jose";
         final var expectedLastName = "Silva";
 
-        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, "023.123.123.12");
+        final var actualCustomer = Customer.newCustomer(expectedFirstName, expectedLastName, "023.123.123.12", null);
 
         Notification notification = Notification.create();
         actualCustomer.validate(notification);

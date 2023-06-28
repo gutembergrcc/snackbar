@@ -7,6 +7,6 @@ public interface OrderMapper {
 
     static OrderResponse toOrderResponse(final Order order) {
         return new OrderResponse(order.getId().getValue(),
-                order.getProduct(), order.getCustomer(), order.getDescription(), order.getStatus());
+                order.getProduct(), order.getCustomer().getId().getValue(), order.getDescription(), order.getStatus());
     }
 }

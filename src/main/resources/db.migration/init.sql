@@ -24,3 +24,17 @@ create table orders (
     status varchar(50) not null,
     primary key (id);
 )
+
+
+ALTER TABLE `snackbar`.`products`
+ADD COLUMN `order_id` VARCHAR(45) NOT NULL AFTER `price`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `order_id`);
+;
+
+
+ALTER TABLE `snackbar`.`customers`
+ADD COLUMN `order_id` VARCHAR(45) NOT NULL AFTER `last_name`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `order_id`);
+;
