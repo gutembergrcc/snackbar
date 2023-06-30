@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public record ProductResponse(@JsonProperty("id") String id,
                               @JsonProperty("name") String name,
                               @JsonProperty("price") BigDecimal price,
+                              @JsonProperty("quantity") Integer quantity,
                               @JsonProperty("description") String description,
                               @JsonProperty Category category) {
 }

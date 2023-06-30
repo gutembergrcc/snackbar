@@ -2,13 +2,13 @@ package com.snackbar.adapters.outbound.persistence.customer.repository;
 
 import com.snackbar.application.core.domain.customer.Customer;
 import com.snackbar.application.core.domain.customer.CustomerId;
-import com.snackbar.application.core.domain.order.OrderId;
+import com.snackbar.application.core.domain.order.Order;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "Customer")
@@ -28,14 +28,13 @@ public class CustomerJpaEntity {
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
 
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    private OrderId orderId;
+    @JoinColumn(name = "id")
+    private Order orderId;
 
     public CustomerJpaEntity() {
     }
 
-    public CustomerJpaEntity(String id, String firstName, String lastName, String cpf, OrderId orderId) {
+    public CustomerJpaEntity(String id, String firstName, String lastName, String cpf, Order orderId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,7 +70,7 @@ public class CustomerJpaEntity {
         return cpf;
     }
 
-    public OrderId getOrderId() {
+    public Order getOrderId() {
         return orderId;
     }
 }

@@ -7,7 +7,11 @@ import com.snackbar.application.core.domain.exceptions.DomainException;
 import com.snackbar.application.core.domain.product.Category;
 import com.snackbar.application.core.domain.product.Product;
 import com.snackbar.application.core.domain.product.ProductId;
-import com.snackbar.application.ports.inbound.product.*;
+import com.snackbar.application.ports.inbound.product.CreateProductUserCasePort;
+import com.snackbar.application.ports.inbound.product.DeleteProductUseCasePort;
+import com.snackbar.application.ports.inbound.product.FindAllProductsUseCasePort;
+import com.snackbar.application.ports.inbound.product.FindProductsByCategoryUseCasePort;
+import com.snackbar.application.ports.inbound.product.UpdateProductUseCasePort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +44,7 @@ public class ProductController implements ProductAPI{
     public ResponseEntity<?> createProduct(ProductRequest request) {
         ProductResponse output;
         try{
-            var newProduct = Product.newProduct(request.name(), request.price(), request.description(), request.category());
+            var newProduct = Product.newProduct(request.name(), request.price(), request.quantity(), request.description(), request.category());
             var product = this.createProductUseCasePort.execute(newProduct);
             output = ProductMapper.toProductResponse(product);
         }catch (DomainException e){
@@ -55,7 +59,7 @@ public class ProductController implements ProductAPI{
         ProductResponse output;
         try{
             var productId = ProductId.from(id);
-            var updateProduct = Product.with(productId, request.name(), request.price(), request.description(), request.category());
+            var updateProduct = Product.with(productId, request.name(), request.price(), request.quantity(), request.description(), request.category());
             var product = this.updateProductUseCasePort.execute(updateProduct);
             output = ProductMapper.toProductResponse(product);
         }catch (DomainException e){

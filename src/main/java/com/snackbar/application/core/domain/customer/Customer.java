@@ -1,17 +1,19 @@
 package com.snackbar.application.core.domain.customer;
 
 import com.snackbar.application.core.domain.Entity;
-import com.snackbar.application.core.domain.order.OrderId;
+import com.snackbar.application.core.domain.order.Order;
 import com.snackbar.application.core.domain.validation.ValidationHandler;
+
+import java.util.List;
 
 public class Customer extends Entity<CustomerId> {
 
     private String firstName;
     private String lastName;
     private String cpf;
-    private OrderId orderId;
+    private Order orderId;
 
-    private Customer(CustomerId customerId, String firstName, String lastName, String cpf, OrderId orderId) {
+    private Customer(CustomerId customerId, String firstName, String lastName, String cpf, Order orderId) {
         super(customerId);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,12 +21,12 @@ public class Customer extends Entity<CustomerId> {
         this.orderId = orderId;
     }
 
-    public static Customer newCustomer(final String firstName, final String lastName, final String cpf, final OrderId orderId) {
+    public static Customer newCustomer(final String firstName, final String lastName, final String cpf, final Order orderId) {
         final var id = CustomerId.unique();
         return new Customer(id, firstName, lastName, cpf, orderId);
     }
 
-    public static Customer with(final CustomerId customerId, final String firstName, final String lastName, final String cpf, final OrderId orderId) {
+    public static Customer with(final CustomerId customerId, final String firstName, final String lastName, final String cpf, final Order orderId) {
         return new Customer(customerId, firstName, lastName, cpf, orderId);
     }
 
@@ -40,7 +42,7 @@ public class Customer extends Entity<CustomerId> {
         return cpf;
     }
 
-    public OrderId getOrderId() {
+    public Order getOrderId() {
         return orderId;
     }
 

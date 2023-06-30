@@ -7,6 +7,6 @@ public interface ProductMapper {
 
     static ProductResponse toProductResponse(final Product product) {
         return new ProductResponse(product.getId().getValue(),
-                product.getName(), product.getPrice(), product.getDescription(), product.getCategory());
+                product.getName(), product.getPrice(), product.getQuantity(), product.getDescription(), product.getCategory());
     }
 }

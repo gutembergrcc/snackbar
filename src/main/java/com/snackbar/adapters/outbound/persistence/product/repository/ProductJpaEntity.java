@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
@@ -28,6 +26,9 @@ public class ProductJpaEntity {
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
+
     @Column(name = "description", nullable = false)
     private String description;
 
@@ -35,38 +36,34 @@ public class ProductJpaEntity {
     @Convert(converter = CategoryConverter.class)
     private Category category;
 
-    @ManyToMany
-    @JoinColumn(name = "order_io")
-    private OrderId orderId;
-
 
 
     public ProductJpaEntity() {
     }
 
-    public ProductJpaEntity(String id, String name, BigDecimal price, String description, Category category, OrderId orderId) {
+    public ProductJpaEntity(String id, String name, BigDecimal price,Integer quantity, String description, Category category, OrderId orderId) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
         this.description = description;
         this.category = category;
-        this.orderId = orderId;
     }
 
     public static ProductJpaEntity from(final Product product) {
-        return new ProductJpaEntity(product.getId().getValue(), product.getName(), product.getPrice(), product.getDescription(), product.getCategory(), null);
+        return new ProductJpaEntity(product.getId().getValue(), product.getName(), product.getPrice(), product.getQuantity(), product.getDescription(), product.getCategory(), null);
     }
 
     public static ProductJpaEntity from(final Category category) {
-        return new ProductJpaEntity(null, null, null, null, category, null);
+        return new ProductJpaEntity(null, null, null, null, null, category, null);
     }
 
     public static ProductJpaEntity from(final OrderId orderId) {
-        return new ProductJpaEntity(null, null, null, null, null, orderId);
+        return new ProductJpaEntity(null, null, null, null, null, null, orderId);
     }
 
     public Product toAggregate() {
-        return Product.with(ProductId.from(getId()), getName(), getPrice(), getDescription(), getCategory());
+        return Product.with(ProductId.from(getId()), getName(), getPrice(), getQuantity(), getDescription(), getCategory());
     }
 
     public String getId() {
@@ -81,6 +78,8 @@ public class ProductJpaEntity {
         return price;
     }
 
+    public Integer getQuantity(){return quantity;}
+
     public String getDescription() {
         return description;
     }
@@ -88,6 +87,4 @@ public class ProductJpaEntity {
     public Category getCategory() {
         return category;
     }
-
-    public OrderId  getOrderId() {return orderId;}
 }

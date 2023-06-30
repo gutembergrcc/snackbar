@@ -19,17 +19,7 @@ public class OrderValidator extends Validator {
 
     @Override
     public void validate() {
-        checkDescriptionConstraints();
         checkCustomerConstraints();
-    }
-
-    private void checkDescriptionConstraints() {
-        String description = this.order.getDescription();
-        checkConstraints("description", description);
-        final int length = description.trim().length();
-        if (length > NAME_MAX_LENGTH || length < NAME_MIN_LENGTH) {
-            this.validationHandler().append(new Error("'"+ description +"' must be between 3 and 255 characters"));
-        }
     }
 
     private void checkCustomerConstraints() {
@@ -37,23 +27,6 @@ public class OrderValidator extends Validator {
 
         if (customer == null) {
             this.validationHandler().append(new Error("'customer' should not be null"));
-        }
-    }
-
-    private void checkConstraints(String description, String value) {
-        if (value == null) {
-            this.validationHandler().append(new Error("'"+ description +"' should not be null"));
-            return;
-        }
-
-        if (value.isBlank()) {
-            this.validationHandler().append(new Error("'"+ description +"' should not be empty"));
-            return;
-        }
-
-        final int length = value.trim().length();
-        if (length > NAME_MAX_LENGTH || length < NAME_MIN_LENGTH) {
-            this.validationHandler().append(new Error("'"+ description +"' must be between 3 and 255 characters"));
         }
     }
 }

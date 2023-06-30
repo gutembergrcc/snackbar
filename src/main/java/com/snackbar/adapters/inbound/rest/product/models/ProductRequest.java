@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 
 public record ProductRequest(@JsonProperty("name") @NotBlank @Schema(description = "Nome do produto", example = "Hambúrguer") String name,
                              @JsonProperty("price") @NotNull @Schema(description = "Preço do produto", example = "35.99") BigDecimal price,
+
+                             @JsonProperty("quantity") @NotNull @Schema(description = "Quantidade do produto", example = "2") Integer quantity,
                              @JsonProperty("description") @NotBlank @Schema(description = "Descrição do produto", example = "Dois hambúrgueres (100% carne bovina), alface americana, queijo sabor cheddar, molho especial, cebola, picles e pão com gergelim.") String description,
                              @JsonProperty ("category") @NotNull @Schema(description = "Categoria do produto, verificar os Enums validos", example = "SNACK") Category category) {
 }
