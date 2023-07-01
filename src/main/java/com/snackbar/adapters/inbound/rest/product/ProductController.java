@@ -17,14 +17,14 @@ import java.util.List;
 @RestController
 public class ProductController implements ProductAPI{
 
-    private final CreateProductUserCasePort createProductUseCasePort;
+    private final CreateProductUseCasePort createProductUseCasePort;
     private final UpdateProductUseCasePort updateProductUseCasePort;
     private final DeleteProductUseCasePort deleteProductUseCasePort;
     private final FindProductsByCategoryUseCasePort findProductByCategoryPort;
     private final FindAllProductsUseCasePort findAllProductsUseCasePort;
 
     public ProductController(
-            final CreateProductUserCasePort createProductUseCasePort,
+            final CreateProductUseCasePort createProductUseCasePort,
             final UpdateProductUseCasePort updateProductUseCasePort,
             final DeleteProductUseCasePort deleteProductUseCasePort,
             final FindProductsByCategoryUseCasePort findProductByCategoryPort,

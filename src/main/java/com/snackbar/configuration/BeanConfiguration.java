@@ -2,6 +2,7 @@ package com.snackbar.configuration;
 
 import com.snackbar.adapters.outbound.persistence.customer.FindCustomerAdapter;
 import com.snackbar.adapters.outbound.persistence.customer.SaveCustomerAdapter;
+import com.snackbar.adapters.outbound.persistence.order.SaveOrderAdapter;
 import com.snackbar.adapters.outbound.persistence.product.DeleteProductAdapter;
 import com.snackbar.adapters.outbound.persistence.product.FindProductAdapter;
 import com.snackbar.adapters.outbound.persistence.product.SaveProductAdapter;
@@ -10,6 +11,7 @@ import com.snackbar.application.core.usecase.customer.autenticate.AutenticateCus
 import com.snackbar.application.core.usecase.customer.create.CreateCustomerUseCase;
 import com.snackbar.application.core.usecase.customer.retrieve.FindAllCustomersUseCase;
 import com.snackbar.application.core.usecase.customer.retrieve.FindCustomerByCpfUseCase;
+import com.snackbar.application.core.usecase.order.create.CreateOrderUseCase;
 import com.snackbar.application.core.usecase.product.create.CreateProductUseCase;
 import com.snackbar.application.core.usecase.product.delete.DeleteProductUseCase;
 import com.snackbar.application.core.usecase.product.retrieve.FindAllProductsUseCase;
@@ -64,5 +66,12 @@ public class BeanConfiguration {
     @Bean
     public AutenticateCustomerByCpfUseCase autenticateCustomerByCpfUseCase(FindCustomerAdapter findCustomerAdapter){
         return new AutenticateCustomerByCpfUseCase(findCustomerAdapter);
+    }
+
+    @Bean
+    public CreateOrderUseCase createOrderUseCase(SaveOrderAdapter saveOrderAdapter,
+                                                 FindCustomerAdapter findCustomerAdapter,
+                                                 FindProductAdapter findProductAdapter){
+        return new CreateOrderUseCase(saveOrderAdapter, findCustomerAdapter, findProductAdapter);
     }
 }

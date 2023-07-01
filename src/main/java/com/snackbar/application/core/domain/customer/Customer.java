@@ -5,9 +5,9 @@ import com.snackbar.application.core.domain.validation.ValidationHandler;
 
 public class Customer extends Entity<CustomerId> {
 
-    private String firstName;
-    private String lastName;
-    private String cpf;
+    private final String firstName;
+    private final String lastName;
+    private final String cpf;
 
     private Customer(CustomerId customerId, String firstName, String lastName, String cpf) {
         super(customerId);

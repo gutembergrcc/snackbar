@@ -2,6 +2,7 @@ package com.snackbar.application.core.usecase.customer.autenticate;
 
 import com.snackbar.application.core.domain.customer.Customer;
 import com.snackbar.application.core.domain.exceptions.DomainException;
+import com.snackbar.application.core.domain.exceptions.ErrorName;
 import com.snackbar.application.core.domain.validation.Error;
 import com.snackbar.application.ports.inbound.customer.AutenticateCustomerByCpfUseCasePort;
 import com.snackbar.application.ports.outbound.customer.FindCustomerByCpfPort;
@@ -19,8 +20,8 @@ public class AutenticateCustomerByCpfUseCase implements AutenticateCustomerByCpf
     @Override
     public Optional<Customer> execute(String cpf) {
         Optional<Customer> customer = this.findCustomerByCpfPort.findCustomerByCpf(cpf);
-        if(!customer.isPresent()){
-            throw DomainException.with(new Error("Cliente não existente ou sem permissão de acesso!"));
+        if(customer.isEmpty()){
+            throw DomainException.with(new Error(ErrorName.CUSTOMER_WITHOUT_ACESS));
         }
         return customer;
     }

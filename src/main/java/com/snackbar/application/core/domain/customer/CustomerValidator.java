@@ -24,23 +24,23 @@ public class CustomerValidator extends Validator {
         checkConstraints("lastName", lastName);
 
         String cpfNumber = this.customer.getCpf();
-        checkCPF("CPF", cpfNumber);
+        checkCPF(cpfNumber);
     }
 
-    private void checkCPF(String fieldName, String value) {
+    private void checkCPF(String value) {
         if (value == null) {
-            this.validationHandler().append(new Error("'"+ fieldName +"' should not be null"));
+            this.validationHandler().append(new Error("'CPF' should not be null"));
             return;
         }
 
         if (value.isBlank()) {
-            this.validationHandler().append(new Error("'"+ fieldName +"' should not be empty"));
+            this.validationHandler().append(new Error("'CPF' should not be empty"));
             return;
         }
 
         boolean isNumeric = value.matches("[0-9]+");
         if (!isNumeric) {
-            this.validationHandler().append(new Error("'"+ fieldName +"' should be numeric"));
+            this.validationHandler().append(new Error("'CPF' should be numeric"));
         }
     }
 

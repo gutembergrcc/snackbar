@@ -7,7 +7,7 @@ import com.snackbar.adapters.inbound.rest.customer.models.CustomerResponse;
 import com.snackbar.application.core.domain.customer.Customer;
 import com.snackbar.application.core.domain.exceptions.DomainException;
 import com.snackbar.application.ports.inbound.customer.AutenticateCustomerByCpfUseCasePort;
-import com.snackbar.application.ports.inbound.customer.CreateCustomerUserCasePort;
+import com.snackbar.application.ports.inbound.customer.CreateCustomerUseCasePort;
 import com.snackbar.application.ports.inbound.customer.FindAllCustomersUseCasePort;
 import com.snackbar.application.ports.inbound.customer.FindCustomerByCpfUseCasePort;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -26,13 +26,13 @@ import java.util.stream.Collectors;
 @RestController
 public class CustomerController implements CustomerAPI {
 
-    private final CreateCustomerUserCasePort createCustomerUserCasePort;
+    private final CreateCustomerUseCasePort createCustomerUserCasePort;
     private final FindAllCustomersUseCasePort findAllCustomersUseCasePort;
     private final FindCustomerByCpfUseCasePort findCustomerByCpfUseCasePort;
     private final AutenticateCustomerByCpfUseCasePort autenticateCustomerByCpfUseCasePort;
 
     public CustomerController(
-            final CreateCustomerUserCasePort createCustomerUserCasePort,
+            final CreateCustomerUseCasePort createCustomerUserCasePort,
             final FindAllCustomersUseCasePort findAllCustomersUseCasePort,
             final FindCustomerByCpfUseCasePort findCustomerByCpfUseCasePort,
             AutenticateCustomerByCpfUseCasePort autenticateCustomerByCpfUseCasePort) {
@@ -46,7 +46,7 @@ public class CustomerController implements CustomerAPI {
     public ResponseEntity<?> createCustomer(CustomerRequest request) {
         final Optional<Customer> customerInBase = this.findCustomerByCpfUseCasePort.execute(request.cpfNumber());
         try{
-            if (!customerInBase.isPresent()){
+            if (customerInBase.isEmpty()){
                 String cpfSomenteDigitos = request.cpfNumber().replaceAll("\\D", "");
                 var newCustomer = Customer.newCustomer(request.firstName(), request.lastName(), cpfSomenteDigitos);
                 var customer = this.createCustomerUserCasePort.execute(newCustomer);

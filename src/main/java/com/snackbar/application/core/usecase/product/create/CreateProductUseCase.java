@@ -3,10 +3,10 @@ package com.snackbar.application.core.usecase.product.create;
 import com.snackbar.application.core.domain.exceptions.DomainException;
 import com.snackbar.application.core.domain.product.Product;
 import com.snackbar.application.core.domain.validation.Notification;
-import com.snackbar.application.ports.inbound.product.CreateProductUserCasePort;
+import com.snackbar.application.ports.inbound.product.CreateProductUseCasePort;
 import com.snackbar.application.ports.outbound.product.SaveProductPort;
 
-public class CreateProductUseCase implements CreateProductUserCasePort {
+public class CreateProductUseCase implements CreateProductUseCasePort {
 
     private final SaveProductPort saveProductPort;
 

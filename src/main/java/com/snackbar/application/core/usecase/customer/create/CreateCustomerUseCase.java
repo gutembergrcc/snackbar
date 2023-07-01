@@ -3,10 +3,10 @@ package com.snackbar.application.core.usecase.customer.create;
 import com.snackbar.application.core.domain.customer.Customer;
 import com.snackbar.application.core.domain.exceptions.DomainException;
 import com.snackbar.application.core.domain.validation.Notification;
-import com.snackbar.application.ports.inbound.customer.CreateCustomerUserCasePort;
+import com.snackbar.application.ports.inbound.customer.CreateCustomerUseCasePort;
 import com.snackbar.application.ports.outbound.customer.SaveCustomerPort;
 
-public class CreateCustomerUseCase implements CreateCustomerUserCasePort {
+public class CreateCustomerUseCase implements CreateCustomerUseCasePort {
 
     private final SaveCustomerPort saveCustomerPort;
 
@@ -16,8 +16,6 @@ public class CreateCustomerUseCase implements CreateCustomerUserCasePort {
 
     @Override
     public Customer execute(Customer customer) {
-
-
         final var notification = Notification.create();
         customer.validate(notification);
         if(notification.hasError()){
