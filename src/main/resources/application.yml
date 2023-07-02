@@ -16,6 +16,7 @@ spring:
     url: jdbc:mysql://${mysql.url}/${mysql.schema}?autoReconnect=true&useSSL=true&serverTimezone=UTC&characterEncoding=UTF-8
     username: ${mysql.username}
     password: ${mysql.password}
+    continue-on-error: true
     hikari:
       auto-commit: false
       connection-timeout: 250 # É uma configuração em milliseconds. O ideal é manter baixo para que estoure timeout logo e não prenda as threads.

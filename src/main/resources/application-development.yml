@@ -2,8 +2,7 @@ mysql:
   username: root
   password: 123456
   schema: snackbar
-  url: snackbar-mysql-db:3307
-  #url: 127.0.0.1:3307
+  url: snackbar-mysql-db:3306
 
 server:
   port: 8080

@@ -6,14 +6,14 @@ WORKDIR /usr/app/
 
 COPY . .
 
-RUN gradle bootJar
+RUN gradle build
 
 # build runtime
 FROM eclipse-temurin:17.0.5_8-jre-alpine
 
-COPY --from=builder /usr/app/build/libs/*.jar /opt/app/application-plain.jar
+COPY --from=builder /usr/app/build/libs/*.jar /opt/app/snackbar.jar
 
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
-CMD java -jar /opt/app/application-plain.jar
+CMD java -jar /opt/app/snackbar.jar
