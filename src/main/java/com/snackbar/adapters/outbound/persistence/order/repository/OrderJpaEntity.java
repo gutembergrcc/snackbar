@@ -74,6 +74,17 @@ public class OrderJpaEntity {
         return orderJpaEntity;
     }
 
+    public static OrderJpaEntity from(final OrderStatus status) {
+        return new OrderJpaEntity(
+                null,
+                null,
+                null,
+                null,
+                null,
+                status,
+                null);
+    }
+
     public Order toAggregate() {
         var orderItems = getItems().stream().map(OrderItemJpaEntity::toAggregate).toList();
         return Order.with(

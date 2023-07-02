@@ -14,7 +14,7 @@ public class DeleteProductUseCase implements DeleteProductUseCasePort  {
     }
 
     @Override
-    public void execute(ProductId productId) {
-        this.deleteProductPort.deleteById(productId);
+    public void execute(String productId) {
+        this.deleteProductPort.deleteById(ProductId.from(productId));
     }
 }

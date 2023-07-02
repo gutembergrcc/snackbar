@@ -4,8 +4,9 @@ import com.snackbar.adapters.inbound.rest.customer.mapper.CustomerMapper;
 import com.snackbar.adapters.inbound.rest.customer.models.AutenticateRequest;
 import com.snackbar.adapters.inbound.rest.customer.models.CustomerRequest;
 import com.snackbar.adapters.inbound.rest.customer.models.CustomerResponse;
-import com.snackbar.application.core.domain.customer.Customer;
 import com.snackbar.application.core.domain.exceptions.DomainException;
+import com.snackbar.application.core.usecase.customer.create.CreateCustomerCommand;
+import com.snackbar.application.core.usecase.customer.CustomerOutput;
 import com.snackbar.application.ports.inbound.customer.AutenticateCustomerByCpfUseCasePort;
 import com.snackbar.application.ports.inbound.customer.CreateCustomerUseCasePort;
 import com.snackbar.application.ports.inbound.customer.FindAllCustomersUseCasePort;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,17 +44,16 @@ public class CustomerController implements CustomerAPI {
 
     @Override
     public ResponseEntity<?> createCustomer(CustomerRequest request) {
-        final Optional<Customer> customerInBase = this.findCustomerByCpfUseCasePort.execute(request.cpfNumber());
+        final CustomerOutput customerInBase = this.findCustomerByCpfUseCasePort.execute(request.cpfNumber());
         try{
-            if (customerInBase.isEmpty()){
-                String cpfSomenteDigitos = request.cpfNumber().replaceAll("\\D", "");
-                var newCustomer = Customer.newCustomer(request.firstName(), request.lastName(), cpfSomenteDigitos);
-                var customer = this.createCustomerUserCasePort.execute(newCustomer);
+            if (customerInBase == null){
+                var command = CreateCustomerCommand.with(request.firstName(), request.lastName(), request.cpfNumber());
+                var customer = this.createCustomerUserCasePort.execute(command);
                 CustomerResponse output = CustomerMapper.toConsumerResponse(customer);
                 return ResponseEntity.created(URI.create("/customer" + output.id())).body(output);
 
             } else {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(CustomerMapper.toConsumerResponse(customerInBase.get()));
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(customerInBase);
             }
         }catch (DomainException e){
             return ResponseEntity.unprocessableEntity().body(e.getErrors());
@@ -69,8 +68,8 @@ public class CustomerController implements CustomerAPI {
     @Override
     public ResponseEntity<?> autenticateCustomer(@Valid AutenticateRequest request) {
         try{
-            final Optional<Customer> customer = this.autenticateCustomerByCpfUseCasePort.execute(request.getCpfNumber());
-            return ResponseEntity.ok().body(CustomerMapper.toConsumerResponse(customer.get()));
+            final CustomerOutput customer = this.autenticateCustomerByCpfUseCasePort.execute(request.getCpfNumber());
+            return ResponseEntity.ok().body(CustomerMapper.toConsumerResponse(customer));
         }catch (DomainException e){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getErrors());
         }

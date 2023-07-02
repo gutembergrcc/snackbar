@@ -1,6 +1,7 @@
 package com.snackbar.application.core.usecase.order.retrieve;
 
 import com.snackbar.application.core.domain.order.Order;
+import com.snackbar.application.core.usecase.order.OrderOutput;
 import com.snackbar.application.ports.inbound.order.FindAllOrdersUseCasePort;
 import com.snackbar.application.ports.outbound.order.FindAllOrdersPort;
 
@@ -15,7 +16,7 @@ public class FindAllOrdersUseCase implements FindAllOrdersUseCasePort {
     }
 
     @Override
-    public List<Order> execute() {
-        return this.findAllOrdersPort.findAllOrders();
+    public List<OrderOutput> execute() {
+        return this.findAllOrdersPort.findAllOrders().stream().map(OrderOutput::from).toList();
     }
 }

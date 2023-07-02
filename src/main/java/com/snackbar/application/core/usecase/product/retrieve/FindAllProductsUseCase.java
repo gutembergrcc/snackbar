@@ -1,6 +1,6 @@
 package com.snackbar.application.core.usecase.product.retrieve;
 
-import com.snackbar.application.core.domain.product.Product;
+import com.snackbar.application.core.usecase.product.ProductOutput;
 import com.snackbar.application.ports.inbound.product.FindAllProductsUseCasePort;
 import com.snackbar.application.ports.outbound.product.FindAllProductsPort;
 
@@ -15,7 +15,7 @@ public class FindAllProductsUseCase implements FindAllProductsUseCasePort {
     }
 
     @Override
-    public List<Product> execute() {
-        return this.findAllProductsPort.findAllProducts();
+    public List<ProductOutput> execute() {
+        return this.findAllProductsPort.findAllProducts().stream().map(ProductOutput::from).toList();
     }
 }

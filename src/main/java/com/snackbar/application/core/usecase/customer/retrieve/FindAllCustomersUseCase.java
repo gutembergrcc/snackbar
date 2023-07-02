@@ -1,6 +1,6 @@
 package com.snackbar.application.core.usecase.customer.retrieve;
 
-import com.snackbar.application.core.domain.customer.Customer;
+import com.snackbar.application.core.usecase.customer.CustomerOutput;
 import com.snackbar.application.ports.inbound.customer.FindAllCustomersUseCasePort;
 import com.snackbar.application.ports.outbound.customer.FindAllCustomersPort;
 
@@ -15,7 +15,7 @@ public class FindAllCustomersUseCase implements FindAllCustomersUseCasePort {
     }
 
     @Override
-    public List<Customer> execute() {
-        return this.findAllCustomersPort.findAllCustomers();
+    public List<CustomerOutput> execute() {
+        return this.findAllCustomersPort.findAllCustomers().stream().map(CustomerOutput::from).toList();
     }
 }

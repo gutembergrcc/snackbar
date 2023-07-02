@@ -1,6 +1,7 @@
 package com.snackbar.application.core.usecase.customer.retrieve;
 
 import com.snackbar.application.core.domain.customer.Customer;
+import com.snackbar.application.core.usecase.customer.CustomerOutput;
 import com.snackbar.application.ports.inbound.customer.FindCustomerByCpfUseCasePort;
 import com.snackbar.application.ports.outbound.customer.FindCustomerByCpfPort;
 
@@ -15,7 +16,12 @@ public class FindCustomerByCpfUseCase implements FindCustomerByCpfUseCasePort {
     }
 
     @Override
-    public Optional<Customer> execute(String cpf) {
-        return this.findCustomerByCpfPort.findCustomerByCpf(cpf);
+    public CustomerOutput execute(String cpf) {
+        Optional<Customer> customerByCpf = this.findCustomerByCpfPort.findCustomerByCpf(cpf);
+
+        if(customerByCpf.isPresent()){
+            return CustomerOutput.from(customerByCpf.get());
+        }
+        return null;
     }
 }

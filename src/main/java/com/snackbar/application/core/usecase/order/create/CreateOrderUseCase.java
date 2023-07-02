@@ -9,6 +9,7 @@ import com.snackbar.application.core.domain.order.OrderItem;
 import com.snackbar.application.core.domain.product.ProductId;
 import com.snackbar.application.core.domain.validation.Error;
 import com.snackbar.application.core.domain.validation.Notification;
+import com.snackbar.application.core.usecase.order.OrderOutput;
 import com.snackbar.application.ports.inbound.order.CreateOrderUseCasePort;
 import com.snackbar.application.ports.outbound.customer.FindCustomerByIdPort;
 import com.snackbar.application.ports.outbound.order.SaveOrderPort;
@@ -35,7 +36,7 @@ public class CreateOrderUseCase implements CreateOrderUseCasePort {
     }
 
     @Override
-    public Order execute(CreateOrderCommand command) {
+    public OrderOutput execute(CreateOrderCommand command) {
         Optional<Customer> customer = getCustomer(command);
         var order = Order.newOrder(command.ticket(), getOrderItemsValid(command), customer.get(), command.observation());
 
@@ -45,7 +46,7 @@ public class CreateOrderUseCase implements CreateOrderUseCasePort {
             throw DomainException.with(notification.getErrors());
         }
 
-        return this.saveOrderPort.save(order);
+        return OrderOutput.from(this.saveOrderPort.save(order));
     }
 
     private Optional<Customer> getCustomer(CreateOrderCommand command) {

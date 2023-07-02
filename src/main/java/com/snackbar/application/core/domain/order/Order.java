@@ -14,7 +14,7 @@ public class Order extends Entity<OrderId> {
     private final List<OrderItem> items;
     private final Customer customer;
     private final String observation;
-    private final OrderStatus status;
+    private OrderStatus status;
     private final Instant createdAt;
 
     private Order(final OrderId orderId,
@@ -76,5 +76,9 @@ public class Order extends Entity<OrderId> {
 
     public Instant getCreatedAt() {
         return createdAt;
+    }
+
+    public void changeStatus(OrderStatus newStatus){
+        this.status = newStatus;
     }
 }

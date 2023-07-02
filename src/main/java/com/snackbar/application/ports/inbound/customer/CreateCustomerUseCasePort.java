@@ -1,8 +1,9 @@
 package com.snackbar.application.ports.inbound.customer;
 
-import com.snackbar.application.core.domain.customer.Customer;
+import com.snackbar.application.core.usecase.customer.CustomerOutput;
+import com.snackbar.application.core.usecase.customer.create.CreateCustomerCommand;
 
 public interface CreateCustomerUseCasePort {
 
-    Customer execute(Customer customer);
+    CustomerOutput execute(CreateCustomerCommand customer);
 }
