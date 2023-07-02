@@ -1,8 +1,9 @@
 package com.snackbar.application.ports.inbound.product;
 
-import com.snackbar.application.core.domain.product.Product;
+import com.snackbar.application.core.usecase.product.ProductOutput;
+import com.snackbar.application.core.usecase.product.update.UpdateProductCommand;
 
 public interface UpdateProductUseCasePort {
 
-    Product execute(Product product);
+    ProductOutput execute(UpdateProductCommand command);
 }

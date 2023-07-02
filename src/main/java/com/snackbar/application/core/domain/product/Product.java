@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 
 public class Product extends Entity<ProductId> {
 
-    private String name;
-    private BigDecimal price;
-    private String description;
-    private Category category;
+    private final String name;
+    private final BigDecimal price;
+    private final String description;
+    private final Category category;
 
     private Product(final ProductId id, final String name, final BigDecimal price, final String description, final Category category) {
         super(id);
