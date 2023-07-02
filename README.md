@@ -122,17 +122,17 @@ Nesse mesmo arquivo copiamos o Jar gerado pela aplicação, criamos um Usuário 
 
 Gerar a Imagem da Aplicação atraves do DockerFile
 ```shell
-docker build -t gutembergrcc/spring-boot-docker-language-app .
+docker build -t gutembergrcc/snackbar-app .
 ```
 
 Caso queira gerar o build do Gradle e gerar a imagem, basta executar o comando abaixo:
 ```shell
-docker build -f Dockerfile.dev -t gutembergrcc/spring-boot-docker-language-app:latest .
+docker build -f Dockerfile.dev -t gutembergrcc/snackbar-app:latest .
 ```
 
 Para subir a imagem para o Hub:
 ```shell
-docker push gutembergrcc/spring-boot-docker-language-app
+docker push gutembergrcc/snackbar-app
 ```
 
 ## Quero desenvolver novos Use Cases, qual a forma mais rápida de testar?
