@@ -115,6 +115,8 @@ Nesse mesmo arquivo possui a configuração de rede do docker e os mapeamos de p
 Nesse caso, "17.0.5_8" indica a versão do Java 17.0.5, enquanto "jre" significa que a imagem contém apenas a Java Runtime Environment, que é o ambiente de execução do Java, sem o kit de desenvolvimento (JDK). Por fim, "alpine" refere-se à base da imagem, que é a distribuição leve Alpine Linux
 Nesse mesmo arquivo copiamos o Jar gerado pela aplicação, criamos um Usuário e Grupo e executamos o Jar da aplicação.
 
+Como a aplicação é dependente da base de dados, além da tag depends_on no docker-compose, foi adicionado um .sh responsável por verificar se a base de dados já está pronta. Essa abordagem evita erros ao subir a aplicação, mas caso evite a utilização do .sh a aplicação possui retry para verificar se a base já está disponível.
+
 `Dockerfile.dev`: Muito similar com a configuração acima, a diferença que esse Dockerfile tem o comando para atualizar e regerar o Jar da aplicação.
 
 ### Comandos úteis do Docker
