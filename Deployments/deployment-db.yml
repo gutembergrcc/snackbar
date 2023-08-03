@@ -16,12 +16,10 @@ spec:
         - name: container-db
           image: mysql:8
           ports:
-            - containerPort: 3306
+            - containerPort: 3307
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: 123456
-              name: MYSQL_DATABASE
-              value: snackbar
           volumeMounts:
             - name: db
               mountPath: /var/lib/mysql

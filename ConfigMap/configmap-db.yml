@@ -1,9 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mysql-configmap
+  name: configmap-db
 data:
   init.sql: |
+    CREATE DATABASE snackbar;
+    USE snackbar;
+    
     create table customers (
         id varchar(50) not null,
         cpf varchar(11) not null,
