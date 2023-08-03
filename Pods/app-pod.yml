@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata::
+  name: snackbar-app-Pod
+  labels:
+    app: web
+spec:
+  containers:
+    - name: web-controller
+      image: gutembergrcc/snackbar-app
+      ports:
+        - containerPort: 8080

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aplicacao-deployment
+spec:
+  replicas: 3  
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: container-app
+          image: gutembergrcc/snackbar-app:latest
+          ports:
+            - containerPort: 8080
