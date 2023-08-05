@@ -20,8 +20,6 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "123456"
-            - name: MYSQL_DATABASE
-              value: "snackbar"
           volumeMounts:
             - name: mysql-db
               mountPath: /var/lib/mysql
