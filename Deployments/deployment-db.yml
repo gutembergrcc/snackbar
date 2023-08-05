@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: db-deployment
 spec:
-  replicas: 3  
+  replicas: 1
   selector:
     matchLabels:
       app: db
@@ -16,16 +16,22 @@ spec:
         - name: container-db
           image: mysql:8
           ports:
-            - containerPort: 3307
+            - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: 123456
+              value: "123456"
+            - name: MYSQL_DATABASE
+              value: "snackbar"
           volumeMounts:
-            - name: db
+            - name: mysql-db
               mountPath: /var/lib/mysql
-              name: ./src/main/resources/db.migration/init.sql
-              mountPath: /docker-entrypoint-initdb.d/init.sql
+            - name: init-sql
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
       volumes:
-      - name: mysql-persistent-storage
+      - name: mysql-db
         persistentVolumeClaim:
           claimName: mysql-pvc
+      - name: init-sql
+        configMap:
+          name: configmap-db
